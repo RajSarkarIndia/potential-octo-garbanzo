@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- 1. Google Fonts: Averia Serif Libre -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <title>CitrineSocial</title>
+
+    <!-- 2. Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 3. Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Averia Serif Libre"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { background: #0B0E14; overflow-x: hidden; font-family: 'Averia Serif Libre', serif; }
+
+        /* Floating animations for hero section */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float 6s ease-in-out 3s infinite; }
+    </style>
+</head>
+<body class="min-h-screen relative bg-[#0B0E14] text-slate-100 overflow-x-hidden selection:bg-amber-400 selection:text-slate-950">
+
+<!-- =========================================================
+     FIGMA ARTBOARD BACKGROUND LINES & AMBIENT GLOW
+     ========================================================= -->
+<div class="pointer-events-none fixed inset-0 z-0">
+    <!-- Subtle vertical architectural guide lines -->
+    <div class="max-w-7xl mx-auto h-full border-x border-white/[0.04] grid grid-cols-2 lg:grid-cols-4">
+        <div class="border-r border-white/[0.03] h-full"></div>
+        <div class="border-r border-white/[0.03] h-full hidden lg:block"></div>
+        <div class="border-r border-white/[0.03] h-full hidden lg:block"></div>
+    </div>
+    <!-- Soft Citrine & Emerald light leaks -->
+    <div class="absolute top-0 right-1/4 w-[38rem] h-[28rem] bg-amber-500/[0.07] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-1/4 left-10 w-[32rem] h-[32rem] bg-emerald-500/[0.05] rounded-full blur-[150px]"></div>
+</div>
+
+<!-- =========================================================
+     UNIFIED FIXED HEADER WITH DIAMOND SVG LOGO
+     ========================================================= -->
+<header data-aos="fade-down" data-aos-duration="1000" class="fixed top-0 left-0 w-full z-50 bg-[#0B0E14]/85 backdrop-blur-xl border-b border-white/[0.08]">
+
+    <!-- Subtle Figma Corner Crosshairs -->
+    <span class="hidden xl:block absolute bottom-1 left-3 text-amber-400/40 text-[10px] leading-none select-none pointer-events-none">+</span>
+    <span class="hidden xl:block absolute bottom-1 right-3 text-amber-400/40 text-[10px] leading-none select-none pointer-events-none">+</span>
+
+    <nav class="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-6">
+
+        <!-- LEFT: DIAMOND LOGO & BRAND -->
+        <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            <a href="#" class="flex items-center gap-3 group">
+                <svg
+                    viewBox="0 0 1000 1000"
+                    class="w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110 flex-shrink-0"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <defs>
+                        <linearGradient id="citrineShellLogoGrad" x1="100" y1="250" x2="900" y2="750" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#FDE68A" />
+                            <stop offset="50%" stop-color="#F59E0B" />
+                            <stop offset="100%" stop-color="#D97706" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="300,250 700,250 900,400 900,425 500,750 100,425 100,400" stroke="url(#citrineShellLogoGrad)" stroke-width="18" stroke-linejoin="round" />
+                    <line x1="100" y1="400" x2="900" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="14" />
+                    <line x1="100" y1="425" x2="900" y2="425" stroke="url(#citrineShellLogoGrad)" stroke-width="14" />
+                    <line x1="230" y1="400" x2="230" y2="425" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="365" y1="400" x2="365" y2="425" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="500" y1="400" x2="500" y2="425" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="635" y1="400" x2="635" y2="425" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="770" y1="400" x2="770" y2="425" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="300" y1="250" x2="230" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="300" y1="250" x2="365" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="400" y1="250" x2="365" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="400" y1="250" x2="500" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="500" y1="250" x2="365" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="500" y1="250" x2="500" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="500" y1="250" x2="635" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="600" y1="250" x2="500" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="600" y1="250" x2="635" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="700" y1="250" x2="635" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="700" y1="250" x2="770" y2="400" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="230" y1="425" x2="500" y2="750" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="365" y1="425" x2="500" y2="750" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="500" y1="425" x2="500" y2="750" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="635" y1="425" x2="500" y2="750" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                    <line x1="770" y1="425" x2="500" y2="750" stroke="url(#citrineShellLogoGrad)" stroke-width="12" />
+                </svg>
+
+                <span class="text-lg sm:text-xl font-bold tracking-tight text-white">
+                    Citrine<span class="text-amber-400">Social</span>
+                </span>
+            </a>
+        </div>
+
+        <!-- CENTER: NAVIGATION LINKS -->
+        <div class="hidden md:flex items-center gap-10 text-sm font-bold text-slate-400 flex-1 justify-center">
+            <a href="#why" class="hover:text-amber-400 transition-colors">Why</a>
+            <a href="#features" class="hover:text-amber-400 transition-colors">Features</a>
+            <a href="#developer" class="hover:text-amber-400 transition-colors">Developer</a>
+            <a href="#tech" class="hover:text-amber-400 transition-colors">Technology</a>
+        </div>
+
+        <!-- RIGHT: ACTIONS -->
+        <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
+            <a href="https://www.linkedin.com/company/citrinesocialapp"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="text-slate-400 hover:text-amber-400 transition items-center gap-2 font-semibold text-sm hidden lg:flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.48 1s2.5 1.12 2.5 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.1c.7-1.3 2.4-2.7 5-2.7 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9s-2.8 1.9-2.8 3.8V24h-5V8z"/>
+                </svg>
+                <span class="hidden lg:block">Follow Us</span>
+            </a>
+            <button onclick="openModal()" class="bg-amber-400 hover:bg-amber-300 transition font-bold text-slate-950 px-5 py-2.5 rounded-full text-sm shrink-0 shadow-[0_0_25px_rgba(245,158,11,0.3)]">
+                Join Waitlist
+            </button>
+        </div>
+
+    </nav>
+</header>
+
+<!-- =========================================================
+     HERO — ASYMMETRIC EDITORIAL CANVAS
+     ========================================================= -->
+<section class="relative z-10 min-h-screen flex items-center pt-28 pb-16 lg:py-24 border-b border-white/[0.08] overflow-hidden">
+
+    <!-- Figma Corner Crosshairs -->
+    <span class="hidden lg:block absolute top-24 left-4 text-amber-400/40 text-xs select-none">+</span>
+    <span class="hidden lg:block absolute top-24 right-4 text-amber-400/40 text-xs select-none">+</span>
+    <span class="hidden lg:block absolute bottom-4 left-4 text-amber-400/40 text-xs select-none">+</span>
+    <span class="hidden lg:block absolute bottom-4 right-4 text-amber-400/40 text-xs select-none">+</span>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-14 lg:gap-16 items-center">
+
+        <div>
+            <div class="relative isolate">
+                <div class="pointer-events-none absolute -inset-x-12 inset-y-4 -z-10 rounded-full bg-amber-400/[0.08] blur-3xl"></div>
+                <h1 data-aos="fade-right" data-aos-duration="800" class="mt-4 text-5xl sm:text-6xl lg:text-[5.25rem] font-black leading-[0.94] tracking-tight text-white">
+                    Social media<br>
+                    built around<br>
+                    <span class="relative inline-block text-amber-400">
+                        your interests.
+                        <span class="block h-1.5 w-full bg-gradient-to-r from-amber-400 via-emerald-400 to-transparent rounded-full mt-2"></span>
+                    </span>
+                </h1>
+            </div>
+
+            <p data-aos="fade-up" data-aos-delay="200" class="mt-8 text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed max-w-xl">
+                <b class="text-white">CitrineSocial</b> is a modern social media platform designed around your choices instead of engagement algorithms.
+                Choose the topics you want to see the most—Travel, Food, Technology, Gaming, Photography, Nature, and more.
+                Your feed is personalized from the interests <b class="text-amber-400">you explicitly select</b>, and you can update them anytime.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3 text-xs sm:text-sm text-slate-300">
+                <span data-aos="zoom-in" data-aos-delay="300" class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03]"><span class="text-emerald-400">✓</span> No Recommendation Algorithm</span>
+                <span data-aos="zoom-in" data-aos-delay="400" class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03]"><span class="text-amber-400">✓</span> Interest-Based Feed</span>
+                <span data-aos="zoom-in" data-aos-delay="500" class="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03]"><span class="text-emerald-400">✓</span> Minimal Tracking</span>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="600" class="mt-10 flex flex-wrap gap-4">
+                <button onclick="openModal()" class="bg-amber-400 text-slate-950 px-8 py-4 rounded-full font-bold hover:bg-amber-300 transition-all duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)]">Join Waitlist</button>
+                <a href="#why" class="border border-white/20 hover:border-amber-400 hover:text-amber-400 text-white px-8 py-4 rounded-full font-bold transition">Learn More</a>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div data-aos="fade-left" data-aos-delay="200">
+                <div class="bg-[#111722]/90 backdrop-blur-md border border-white/[0.1] border-t-amber-400/60 p-6 sm:p-8 animate-float">
+                    <h3 class="font-bold text-xl text-white mb-4">Interests Chosen by You</h3>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="rounded-full border border-amber-300/25 bg-white/[0.03] px-4 py-1.5 text-sm font-medium text-amber-200">Travel</span>
+                        <span class="rounded-full border border-emerald-300/25 bg-white/[0.03] px-4 py-1.5 text-sm font-medium text-emerald-200">Food</span>
+                        <span class="rounded-full border border-amber-300/25 bg-white/[0.03] px-4 py-1.5 text-sm font-medium text-amber-200">Programming</span>
+                        <span class="rounded-full border border-emerald-300/25 bg-white/[0.03] px-4 py-1.5 text-sm font-medium text-emerald-200">Photography</span>
+                        <span class="rounded-full border border-amber-300/25 bg-white/[0.03] px-4 py-1.5 text-sm font-medium text-amber-200">Nature</span>
+                        <span class="rounded-full border border-emerald-300/25 bg-white/[0.03] px-4 py-1.5 text-sm font-medium text-emerald-200">Gaming</span>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" data-aos-delay="400">
+                <div class="bg-[#111722]/90 backdrop-blur-md border border-white/[0.1] border-t-emerald-400/60 p-6 sm:p-8 animate-float-delayed">
+                    <h3 class="font-bold text-xl text-white mb-4">Your Feed</h3>
+                    <div class="space-y-3">
+                        <div class="bg-white/[0.03] border-l-2 border-amber-400 p-4 text-slate-200">📷 Hiking through the Himalayas</div>
+                        <div class="bg-white/[0.03] border-l-2 border-emerald-400 p-4 text-slate-200">🍜 Best homemade ramen recipe</div>
+                        <div class="bg-white/[0.03] border-l-2 border-amber-400 p-4 text-slate-200">💻 Spring Boot GraphQL tutorial</div>
+                    </div>
+                    <p class="mt-5 text-sm text-slate-400">Your interests shape your feed—not an engagement algorithm.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================
+     WHY CITRINESOCIAL? — INTERACTIVE STRIKE-THROUGH MATRIX
+     ========================================================= -->
+<section id="why" class="relative z-10 py-20 sm:py-28 border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="mb-16 max-w-5xl">
+            <h2 data-aos="fade-up" class="text-4xl sm:text-6xl font-black text-white leading-none">Why CitrineSocial?</h2>
+            <p data-aos="fade-up" data-aos-delay="100" class="mt-6 text-slate-300 text-base sm:text-lg leading-relaxed">Most social media platforms continuously analyze your behaviour to maximize engagement. CitrineSocial takes a different approach.</p>
+        </div>
+
+        <!-- ARCHITECTURAL COMPARISON TABLE (INTERSECTING HAIRLINES) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-white/[0.12] divide-y lg:divide-y-0 lg:divide-x divide-white/[0.12]">
+
+            <div data-aos="fade-right" data-aos-delay="200" class="py-10 lg:pr-12">
+                <h3 class="text-xl sm:text-2xl font-bold text-red-400 mb-8">Typical Social Media</h3>
+                <ul class="space-y-5 text-slate-400 text-base sm:text-lg">
+                    <li class="group flex items-center gap-4 cursor-default">
+                        <span class="text-red-500 font-bold">✕</span>
+                        <span class="group-hover:line-through group-hover:text-slate-600 transition-all duration-300">Tracks clicks and watch time</span>
+                    </li>
+                    <li class="group flex items-center gap-4 cursor-default">
+                        <span class="text-red-500 font-bold">✕</span>
+                        <span class="group-hover:line-through group-hover:text-slate-600 transition-all duration-300">Optimizes for engagement</span>
+                    </li>
+                    <li class="group flex items-center gap-4 cursor-default">
+                        <span class="text-red-500 font-bold">✕</span>
+                        <span class="group-hover:line-through group-hover:text-slate-600 transition-all duration-300">Endless recommendation algorithm</span>
+                    </li>
+                    <li class="group flex items-center gap-4 cursor-default">
+                        <span class="text-red-500 font-bold">✕</span>
+                        <span class="group-hover:line-through group-hover:text-slate-600 transition-all duration-300">Decides what you should see</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-aos="fade-left" data-aos-delay="300" class="py-10 lg:pl-12">
+                <h3 class="text-xl sm:text-2xl font-bold text-amber-400 mb-8">CitrineSocial</h3>
+                <ul class="space-y-5 text-white text-base sm:text-lg">
+                    <li class="flex items-center gap-4 hover:translate-x-2 transition-transform duration-300">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span>Interests Chosen by You</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:translate-x-2 transition-transform duration-300">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span>Feed follows your selections</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:translate-x-2 transition-transform duration-300">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span>Change interests anytime</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:translate-x-2 transition-transform duration-300">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span>No engagement-based recommendation algorithm</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- 3 CORE BENEFITS (OPEN EDITORIAL COLUMNS) -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+            <div data-aos="fade-up" data-aos-delay="100" class="group">
+                <div class="h-0.5 w-8 bg-amber-400 group-hover:w-full transition-all duration-500 mb-5"></div>
+                <h3 class="font-bold text-xl text-white">No Recommendation Algorithm</h3>
+                <p class="mt-3 text-slate-300 leading-relaxed">Content isn't ranked by what keeps you scrolling. Your chosen interests determine what appears.</p>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="200" class="group">
+                <div class="h-0.5 w-8 bg-emerald-400 group-hover:w-full transition-all duration-500 mb-5"></div>
+                <h3 class="font-bold text-xl text-white">Minimal Tracking</h3>
+                <p class="mt-3 text-slate-300 leading-relaxed">Instead of building a detailed engagement profile, CitrineSocial simply remembers the interests you explicitly select to personalize your feed.</p>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="300" class="group">
+                <div class="h-0.5 w-8 bg-amber-400 group-hover:w-full transition-all duration-500 mb-5"></div>
+                <h3 class="font-bold text-xl text-white">Always in Control</h3>
+                <p class="mt-3 text-slate-300 leading-relaxed">Add or remove interests whenever you like. Your feed changes because you decided—not because an opaque algorithm did.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================
+     FEATURES — STICKY LEFT STAGE + INTERACTIVE HOVER INDEX
+     ========================================================= -->
+<section id="features" class="relative z-10 py-20 sm:py-28 border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+            <!-- STICKY LEFT COLUMN WITH GIANT WATERMARK DIAMOND -->
+            <div class="lg:col-span-4 lg:sticky lg:top-28 overflow-hidden">
+                <h2 data-aos="fade-right" class="text-4xl sm:text-6xl font-black text-white">Features</h2>
+
+                <!-- Subtle Rotating Diamond Blueprint Watermark -->
+                <div class="mt-10 hidden lg:flex items-center justify-start opacity-25">
+                    <svg viewBox="0 0 1000 1000" class="w-56 h-56 animate-[spin_60s_linear_infinite]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="300,250 700,250 900,400 900,425 500,750 100,425 100,400" stroke="#F59E0B" stroke-width="12" />
+                        <line x1="100" y1="400" x2="900" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="100" y1="425" x2="900" y2="425" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="300" y1="250" x2="230" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="300" y1="250" x2="365" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="500" y1="250" x2="365" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="500" y1="250" x2="500" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="500" y1="250" x2="635" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="700" y1="250" x2="635" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="700" y1="250" x2="770" y2="400" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="230" y1="425" x2="500" y2="750" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="365" y1="425" x2="500" y2="750" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="500" y1="425" x2="500" y2="750" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="635" y1="425" x2="500" y2="750" stroke="#F59E0B" stroke-width="10" />
+                        <line x1="770" y1="425" x2="500" y2="750" stroke="#F59E0B" stroke-width="10" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- RIGHT 8 COLUMNS: INTERACTIVE HOVER STREAM -->
+            <div class="lg:col-span-8 divide-y divide-white/[0.08] border-t border-b border-white/[0.08]">
+                <div data-aos="fade-up" data-aos-delay="100" class="group py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 hover:pl-4 transition-all duration-300">
+                    <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors sm:w-64 flex-shrink-0">💬 Messaging</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Private chat, group chat and offline chat.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="150" class="group py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 hover:pl-4 transition-all duration-300">
+                    <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors sm:w-64 flex-shrink-0">👥 Communities</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Join communities around your interests.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="200" class="group py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 hover:pl-4 transition-all duration-300">
+                    <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors sm:w-64 flex-shrink-0">📝 Posts</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Share text, photos and videos.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="250" class="group py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 hover:pl-4 transition-all duration-300">
+                    <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors sm:w-64 flex-shrink-0">🎮 Games</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Play Tic-Tac-Toe with friends.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="group py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 hover:pl-4 transition-all duration-300">
+                    <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors sm:w-64 flex-shrink-0">🎁 Gifts</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Support creators with gifts and subscriptions.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="350" class="group py-6 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 hover:pl-4 transition-all duration-300">
+                    <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors sm:w-64 flex-shrink-0">🔍 Search</h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Discover posts and communities by interest.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================
+     DEVELOPER — MAGAZINE EDITORIAL LAYOUT
+     ========================================================= -->
+<section id="developer" class="relative z-10 py-20 sm:py-28 border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- TOP EDITORIAL HEADER + PORTRAIT -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+
+            <!-- Left 7 Cols: Title + Intro Story -->
+            <div class="lg:col-span-7 space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed order-2 lg:order-1">
+                <h2 data-aos="fade-up" class="text-4xl sm:text-6xl font-black text-white leading-tight">
+                    About CitrineSocial & the Developer
+                </h2>
+
+                <p data-aos="fade-up">
+                    Hello, I am <strong class="text-white">Raj Sarkar</strong>, and I have been developing this social media platform. Why am I building CitrineSocial? If you look at the social media apps near to us like Facebook, Instagram, or Twitter, they are great at providing curated feeds and they are free to use.
+                </p>
+
+                <p data-aos="fade-up" class="border-l-2 border-amber-400 pl-5 text-slate-200">
+                    So, what's the loss here? It's <strong class="text-amber-400">doom scrolling</strong>. It's endless until time exist (and unless we are Loki fixing the time threads xD, if we lose a minute, it will never come back). Moreover, these platforms are free, but they cost you user tracking—monitoring how much time you watch a video, tracking your clicks, location data, and browsing history. Their business models rely heavily on advertising, personalization, and extensive data collection.
+                </p>
+
+                <p data-aos="fade-up" class="text-white font-bold pt-2">
+                    That's why I developed <strong class="text-amber-400">CitrineSocial</strong>, where everything is in your control:
+                </p>
+            </div>
+
+            <!-- Right 5 Cols: Architectural Offset Portrait -->
+            <div data-aos="fade-up" class="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
+                <div class="relative w-64 sm:w-80 group">
+                    <div class="absolute -top-3 -left-3 w-12 h-12 border-t-2 border-l-2 border-amber-400 transition-all duration-500 group-hover:w-full group-hover:h-full"></div>
+                    <div class="absolute -bottom-3 -right-3 w-12 h-12 border-b-2 border-r-2 border-emerald-400 transition-all duration-500 group-hover:w-full group-hover:h-full"></div>
+
+                    <img src="Raj_noBG.png" alt="Raj Sarkar" class="relative z-10 w-full object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-500">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 7 DEVELOPER POINTS IN OPEN 2-COLUMN ARCHITECTURAL FLOW -->
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 pt-10 border-t border-white/[0.08] text-slate-300 text-base leading-relaxed">
+            <li data-aos="fade-right" data-aos-delay="100" class="flex items-start gap-3.5 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">No Doom Scrolling:</strong> Set the exact number of posts you want to watch in a go (10, 20, or 100—no limit). This creates a natural endpoint so you realize how many posts you've consumed and can get back to being productive.</span>
+            </li>
+            <li data-aos="fade-right" data-aos-delay="150" class="flex items-start gap-3.5 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">Feeds:</strong> Feeds are divided into multiple parts: <em>Friends Feed, Follower Feed, Interest Feed, Trending Feed</em> (showing the top 100 posts), and Discovery Feed. The Interest Feed is filled <em>only</em> by the topics you select.</span>
+            </li>
+            <li data-aos="fade-right" data-aos-delay="200" class="flex items-start gap-3.5 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">Real-Time Discovery:</strong> Want to find new friends, follow new people, or develop a new interest? Visit the Discovery Feed to see real-time posts by users with zero algorithm manipulation.</span>
+            </li>
+            <li data-aos="fade-right" data-aos-delay="250" class="flex items-start gap-3.5 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">Minimal Tracking:</strong> We do not track what captures your interest via watch time or clicks. More importantly, we don't store personal data like your IP address or country of origin. (Authentication is managed securely by Auth0).</span>
+            </li>
+            <li data-aos="fade-right" data-aos-delay="300" class="flex items-start gap-3.5 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">Digital Gifts & Monetization:</strong> People can give you predefined digital gifts, which gives you points which you can redeem for gift cards after a cool down period.</span>
+            </li>
+            <li data-aos="fade-right" data-aos-delay="350" class="flex items-start gap-3.5 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">Rich Media:</strong> Upload images, videos, and even <strong class="text-amber-400">3D models</strong> a feature other social media platforms aren't currently providing.</span>
+            </li>
+            <li data-aos="fade-right" data-aos-delay="400" class="flex items-start gap-3.5 md:col-span-2 group">
+                <span class="text-emerald-400 font-bold text-xl leading-none mt-1">✓</span>
+                <span><strong class="text-white group-hover:text-amber-400 transition-colors">AI Moderation:</strong> New posts are actively moderated by AI, and we provide robust reporting options to remove any inappropriate content that slips through.</span>
+            </li>
+        </ul>
+
+        <p data-aos="fade-up" class="mt-10 text-amber-400 text-base sm:text-lg">
+            We even have games too (currently Tic-Tac-Toe, might add more later!). NO feed algorithm and minimal tracking—everything is in your control.
+        </p>
+
+    </div>
+</section>
+
+<!-- =========================================================
+     TECHNOLOGY — ARCHITECTURAL BLUEPRINT SPEC STRIP
+     ========================================================= -->
+<section id="tech" class="relative z-10 py-16 sm:py-24 border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <h2 data-aos="fade-down" class="text-3xl sm:text-5xl font-black text-white mb-12">Built with modern technologies</h2>
+
+        <!-- Seamless Hairline Spec Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 border-t border-l border-white/[0.08]">
+            <div data-aos="flip-down" data-aos-delay="100" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-amber-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Spring Boot 4</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="150" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-amber-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Angular 21</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="200" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-emerald-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">GraphQL</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="250" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-emerald-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">WebSocket</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="300" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-amber-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Redis</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="350" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-amber-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Kafka</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="400" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-emerald-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">PostgreSQL</span>
+            </div>
+            <div data-aos="flip-down" data-aos-delay="450" class="group border-r border-b border-white/[0.08] py-8 px-6 transition-colors hover:bg-amber-400/[0.03]">
+                <span class="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Spring AI</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="relative z-10 py-20 px-4 sm:px-6 text-center">
+    <h2 data-aos="zoom-in" class="text-4xl sm:text-6xl font-black text-white leading-tight">Social media should work for you.</h2>
+    <p data-aos="fade-up" data-aos-delay="100" class="mt-5 text-slate-300 text-base sm:text-lg">Choose your interests. Connect with people. Stay in control.</p>
+    <button data-aos="fade-up" data-aos-delay="200" onclick="openModal()" class="mt-8 bg-amber-400 hover:bg-amber-300 transition text-slate-950 px-8 py-4 rounded-full font-bold shadow-[0_0_30px_rgba(245,158,11,0.3)]">Join Waitlist</button>
+
+    <div data-aos="fade-up" data-aos-delay="300" class="mt-12 pt-8 max-w-md mx-auto text-center">
+        <p class="text-sm text-slate-400 mb-4">
+            Follow the page to get regular updates.
+        </p>
+        <a href="https://www.linkedin.com/company/citrinesocialapp"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-flex items-center justify-center gap-2 bg-[#0A66C2] hover:bg-[#004182] text-white px-6 py-3 rounded-full font-semibold transition w-full sm:w-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.48 1s2.5 1.12 2.5 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.1c.7-1.3 2.4-2.7 5-2.7 5.3 0 6.3 3.5 6.3 8V24h-5v-7.1c0-1.7 0-3.9-2.4-3.9s-2.8 1.9-2.8 3.8V24h-5V8z"/>
+            </svg>
+            Follow on LinkedIn
+        </a>
+    </div>
+</footer>
+
+<!-- =========================================================
+     WAITLIST MODAL
+     ========================================================= -->
+<div id="modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-[#111722] text-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative my-auto border-t border-amber-400">
+        <h2 class="text-2xl sm:text-3xl font-bold">Join Waitlist</h2>
+        <p class="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">Be the first to know when CitrineSocial launches. Get updates, early access, and feature announcements.</p>
+        <!-- Mailchimp Form Integrated Here -->
+        <form action="https://app.us13.list-manage.com/subscribe/post?u=1640e0630fe5feb1b0f85f5e1&id=a63f8720b2&f_id=004745e1f0" method="POST" target="_blank">
+            <input type="email" name="EMAIL" required class="bg-[#0B0E14] text-white border-b-2 border-slate-700 focus:border-amber-400 w-full mt-5 p-3.5 sm:p-4 outline-none text-base" placeholder="Enter your email">
+            <button type="submit" class="w-full mt-4 bg-amber-400 hover:bg-amber-300 transition font-bold text-slate-950 rounded-full p-3.5 sm:p-4">Join Waitlist</button>
+        </form>
+        <button onclick="closeModal()" class="w-full mt-4 text-slate-400 hover:text-white transition py-2">Close</button>
+    </div>
+</div>
+
+<!-- AOS & Modal JavaScript -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50,
+    });
+
+    function openModal(){modal.classList.remove('hidden')}
+    function closeModal(){modal.classList.add('hidden')}
+    window.onclick=e=>{if(e.target.id==='modal')closeModal()}
+</script>
+
+<h3 data-aos="fade-up" class="relative z-10 text-center pb-12 text-slate-400 text-xs sm:text-sm leading-relaxed px-5 sm:px-8 max-w-5xl mx-auto">We are still developing, features might change if required. But we will never compromise with privacy.</h3>
+
+</body>
+</html>
